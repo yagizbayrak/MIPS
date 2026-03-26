@@ -4,7 +4,7 @@ A 32-bit MIPS architecture implemented in FPGA-oriented Verilog.
 
 ## Overview
 
-This repository contains the main building blocks of a simple MIPS-style processor design, including an ALU, control unit, instruction memory, data memory, multiplexers, and immediate-extension modules. The repository description identifies the project as a "32-Bit MIPS Architecture in FPGA Verilog." citeturn310663view0turn182595view0turn182595view1turn182595view2
+This repository contains the main building blocks of a simple MIPS-style processor design, including an ALU, control unit, instruction memory, data memory, multiplexers, and immediate-extension modules. The repository description identifies the project as a "32-Bit MIPS Architecture in FPGA Verilog." 
 
 ## Features
 
