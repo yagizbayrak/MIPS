@@ -40,11 +40,4 @@ vvp mips_sim
 
 If your top-level module is different, replace `*.v` with the specific source files you want to compile.
 
-## Notes
 
-- The repository currently appears to focus on core datapath modules rather than a polished full-system wrapper.
-- `ALU.v` includes a built-in testbench, so it can be used as a quick starting point for simulation.
-
-## License
-
-Add a license file if you want to define how others can use or reuse this code.
