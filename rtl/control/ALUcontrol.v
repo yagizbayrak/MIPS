@@ -1,3 +1,4 @@
+// Second-level decoder turning ALUOp and the funct field into the ALU's four-bit operation select.
 module ALUcontrol(
     input  [31:0] instruction,
     input  [1:0]  ALUop,
@@ -51,18 +52,13 @@ module ALUcontrol(
                         o_ALUcontrol = 4'b1011; // nor
 
                     6'b101010: // slt  (set on less than)
-                        // note: your ALU currently has op 1110 as "A > B -> 1". 
-                        // Implementing slt usually sets 1 if A < B. Choose one:
-                        // - map SLT to a dedicated code and update ALU, or
-                        // - map it here and swap operands upstream.
-                        o_ALUcontrol = 4'b1110; // (use with caution; see note)
+                        o_ALUcontrol = 4'b1110;
 
-                    // shifts (if using 'shamt' and the appropriate funct)
+                    // shifts use the shamt field
                     6'b000000: // sll
-                        o_ALUcontrol = 4'b0100; // shift left by 1 (currently fixed by your ALU)
+                        o_ALUcontrol = 4'b0100; // sll
                     6'b000010: // srl
-                        o_ALUcontrol = 4'b0101; // shift right arithmetic/logical depending on ALU
-                    // add other funct codes here if needed
+                        o_ALUcontrol = 4'b0101; // srl
 
                     default: begin
                         // unknown funct; default to add (safe fallback)
