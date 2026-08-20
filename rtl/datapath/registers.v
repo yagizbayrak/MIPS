@@ -1,3 +1,4 @@
+// Thirty-two entry register file with write-first forwarding so a writeback is visible to decode in the same cycle.
 module registers(
   input clk,
   input reg_write,
@@ -16,7 +17,9 @@ always @(posedge clk) begin
 end
 
 // READ 
-assign read_data1 = (r_reg_1 == 5'd0) ? 32'd0 : all_registers[r_reg_1];
-assign read_data2 = (r_reg_2 == 5'd0) ? 32'd0 : all_registers[r_reg_2];
+assign read_data1 = (r_reg_1 == 5'd0) ? 32'd0 :
+                    (reg_write && (write_register == r_reg_1)) ? write_data : all_registers[r_reg_1];
+assign read_data2 = (r_reg_2 == 5'd0) ? 32'd0 :
+                    (reg_write && (write_register == r_reg_2)) ? write_data : all_registers[r_reg_2];
 
 endmodule
