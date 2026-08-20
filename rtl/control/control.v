@@ -1,8 +1,10 @@
+// Main control decoder mapping each supported opcode onto the datapath control signals.
 module control (
     input wire [31:0] instruction,
     output reg RegDst,
     output reg Jump,
     output reg Branch,
+    output reg BranchNE,
     output reg MemRead,
     output reg MemtoReg,
     output reg [1:0] ALUOp,
@@ -26,6 +28,7 @@ always @(*) begin
         MemRead = 1'b0;
         MemWrite= 1'b0;
         Branch = 1'b0;
+        BranchNE= 1'b0;
         ALUOp = 2'b10;
         Jump = 1'b0;
         SignZero= 1'b0;
@@ -38,6 +41,7 @@ always @(*) begin
         MemRead = 1'b1;
         MemWrite= 1'b0;
         Branch = 1'b0;
+        BranchNE= 1'b0;
         ALUOp = 2'b00;
         Jump = 1'b0;
         SignZero= 1'b0; // sign extend
@@ -50,6 +54,33 @@ always @(*) begin
         MemRead = 1'b0;
         MemWrite= 1'b1;
         Branch = 1'b0;
+        BranchNE= 1'b0;
+        ALUOp = 2'b00;
+        Jump = 1'b0;
+        SignZero= 1'b0;
+        end
+    6'b000100 : begin
+        RegDst = 1'b0;
+        ALUSrc = 1'b0;
+        MemtoReg= 1'b0;
+        RegWrite= 1'b0;
+        MemRead = 1'b0;
+        MemWrite= 1'b0;
+        Branch = 1'b1;
+        BranchNE= 1'b0;
+        ALUOp = 2'b01;
+        Jump = 1'b0;
+        SignZero= 1'b0;
+        end
+    6'b001000 : begin
+        RegDst = 1'b0;
+        ALUSrc = 1'b1;
+        MemtoReg= 1'b0;
+        RegWrite= 1'b1;
+        MemRead = 1'b0;
+        MemWrite= 1'b0;
+        Branch = 1'b0;
+        BranchNE= 1'b0;
         ALUOp = 2'b00;
         Jump = 1'b0;
         SignZero= 1'b0;
@@ -62,6 +93,7 @@ always @(*) begin
         MemRead = 1'b0;
         MemWrite= 1'b0;
         Branch = 1'b1;
+        BranchNE= 1'b1;
         ALUOp = 2'b01;
         Jump = 1'b0;
         SignZero= 1'b0; // sign extend
@@ -74,6 +106,7 @@ always @(*) begin
         MemRead = 1'b0;
         MemWrite= 1'b0;
         Branch = 1'b0;
+        BranchNE= 1'b0;
         ALUOp = 2'b11;
         Jump = 1'b0;
         SignZero= 1'b1; // zero extend
@@ -86,6 +119,7 @@ always @(*) begin
         MemRead = 1'b0;
         MemWrite= 1'b0;
         Branch = 1'b0;
+        BranchNE= 1'b0;
         ALUOp = 2'b00;
         Jump = 1'b1;
         SignZero= 1'b0;
@@ -98,6 +132,7 @@ always @(*) begin
         MemRead = 1'b0;
         MemWrite= 1'b0;
         Branch = 1'b0;
+        BranchNE= 1'b0;
         ALUOp = 2'b10;
         Jump = 1'b0;
         SignZero= 1'b0;
