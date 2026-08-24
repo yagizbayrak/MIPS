@@ -1,0 +1,7 @@
+openlane/runs/*
+!openlane/runs/final3
+openlane/runs/final3/*
+!openlane/runs/final3/final
+!openlane/runs/final3/*.log
+!openlane/runs/final3/resolved.json
+*.vcd
